@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Hey Billi! 🐱💗</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  overflow-x:hidden;
+  font-family:"Trebuchet MS",Arial,sans-serif;
+  color:#fff;
+  background:
+    radial-gradient(circle at 50% 12%,#ffe8c7 0,#f7a8c8 22%,#75418e 58%,#25184d 100%);
+}
+button{font:inherit}
+
+/* ---------- BACKGROUND ---------- */
+.bg{
+  position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;
+}
+.glow{
+  position:absolute;width:500px;height:500px;border-radius:50%;
+  background:#ffb9dd55;filter:blur(70px);left:50%;top:-170px;
+  transform:translateX(-50%);
+}
+.star,.heart,.paw{
+  position:absolute;
+  filter:drop-shadow(0 0 8px #ffd8ff);
+  animation:twinkle 2s ease-in-out infinite alternate;
+}
+.star{font-size:22px}
+.heart{font-size:30px}
+.paw{font-size:30px;color:#ff9edc}
+@keyframes twinkle{to{transform:scale(1.35) rotate(8deg);opacity:.55}}
+.s1{left:6%;top:10%}.s2{left:20%;top:22%;animation-delay:.5s}
+.s3{right:10%;top:14%;animation-delay:1s}.s4{right:25%;top:35%;animation-delay:1.5s}
+.s5{left:45%;top:8%;animation-delay:.7s}.s6{left:70%;top:25%;animation-delay:1.2s}
+.h1{left:4%;top:38%}.h2{right:7%;top:30%;animation-delay:.8s}
+.h3{left:14%;top:72%;animation-delay:1.3s}.h4{right:15%;top:73%;animation-delay:.3s}
+.p1{left:22%;top:17%;animation-delay:.4s}.p2{right:24%;top:20%;animation-delay:1s}
+.p3{left:8%;top:82%;animation-delay:1.7s}.p4{right:8%;top:82%;animation-delay:.6s}
+
+/* ---------- COMMON ---------- */
+.screen{
+  position:relative;z-index:2;
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:35px 18px;
+}
+.hidden{display:none!important}
+.inner{width:min(950px,95vw);text-align:center}
+
+/* ---------- INTRO ---------- */
+.intro h1{
+  font-size:clamp(52px,9vw,95px);
+  line-height:.95;
+  color:#4b145d;
+  text-shadow:3px 3px #fff,0 0 25px #ffb9e9;
+  animation:titleIn 1s ease;
+}
+.intro p{
+  margin-top:15px;
+  font-size:clamp(18px,3vw,27px);
+  color:#4d175c;
+  font-weight:bold;
+}
+@keyframes titleIn{
+  from{opacity:0;transform:scale(.5) translateY(-30px)}
+  to{opacity:1;transform:none}
+}
+.gift-area{
+  position:relative;
+  width:290px;
+  margin:55px auto 20px;
+  cursor:pointer;
+  animation:giftFloat 2.4s ease-in-out infinite;
+}
+.gift{
+  position:relative;width:260px;height:190px;margin:auto;
+  filter:drop-shadow(0 25px 20px #170d353c);
+}
+.box{
+  position:absolute;left:20px;bottom:0;width:220px;height:135px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#ff63b0,#743fc1);
+  border:3px solid #ffd1f2;
+  box-shadow:inset 0 0 25px #ffffff2e;
+}
+.lid{
+  position:absolute;left:10px;top:42px;width:240px;height:45px;
+  border-radius:12px;background:linear-gradient(135deg,#ff7bc2,#a049d0);
+  border:3px solid #ffd1f2;z-index:4;
+}
+.ribbon-v{
+  position:absolute;left:113px;bottom:0;width:35px;height:135px;
+  background:linear-gradient(#ffd75c,#ffb92f);z-index:5;
+}
+.ribbon-h{
+  position:absolute;left:10px;top:58px;width:240px;height:16px;
+  background:#ffd75c;z-index:6;
+}
+.bow{
+  position:absolute;top:8px;left:77px;width:105px;height:55px;z-index:7;
+}
+.bow:before,.bow:after{
+  content:"";position:absolute;width:58px;height:43px;
+  background:linear-gradient(135deg,#ffe26d,#ffad28);
+  border:3px solid #fff0a5;
+}
+.bow:before{left:0;transform:rotate(25deg);border-radius:60% 35% 60% 35%}
+.bow:after{right:0;transform:rotate(-25deg);border-radius:35% 60% 35% 60%}
+.knot{
+  position:absolute;left:40px;top:17px;width:28px;height:28px;
+  border-radius:50%;background:#ffc13c;border:3px solid #fff0a5;
+}
+.gift-label{
+  position:absolute;left:0;right:0;top:112px;z-index:8;
+  font-size:25px;font-weight:bold;color:#fff;
+  text-shadow:0 0 12px #ffb1ec;
+}
+@keyframes giftFloat{
+  50%{transform:translateY(-14px) rotate(1deg)}
+}
+.hint{
+  display:inline-block;background:#ffffffd9;color:#721b72;
+  padding:11px 22px;border-radius:30px;font-weight:bold;
+  box-shadow:0 10px 25px #2b103333;
+  animation:pulse 1.6s infinite;
+}
+@keyframes pulse{50%{transform:scale(1.06)}}
+
+/* ---------- REVEAL ---------- */
+.reveal h2{
+  color:#ffe6a4;font-size:clamp(25px,4vw,38px);
+  text-shadow:0 0 15px #ff73ca;
+}
+.reveal h1{
+  margin:12px 0;
+  font-size:clamp(55px,10vw,100px);
+  line-height:.88;
+  color:#ffb6dc;
+  text-shadow:4px 4px #5d1b74,0 0 25px #fff;
+  animation:pop 1.1s ease;
+}
+@keyframes pop{
+  0%{transform:scale(.2) rotate(-8deg);opacity:0}
+  70%{transform:scale(1.12) rotate(3deg)}
+  100%{transform:scale(1)}
+}
+.cat{
+  font-size:105px;margin:25px;
+  animation:catBounce 1.7s infinite;
+}
+@keyframes catBounce{
+  50%{transform:translateY(-15px) rotate(4deg)}
+}
+.next-btn,.blow-btn{
+  border:2px solid #fff5fb;
+  padding:15px 32px;border-radius:50px;
+  background:linear-gradient(135deg,#ff4f9d,#8e4ed1);
+  color:#fff;font-size:20px;font-weight:bold;
+  cursor:pointer;box-shadow:0 0 30px #ff65bd77;
+  transition:.25s;
+}
+.next-btn:hover,.blow-btn:hover{transform:scale(1.06) translateY(-3px)}
+
+/* ---------- CAKE ---------- */
+.cake-screen h2{
+  color:#fff1c9;font-size:clamp(28px,5vw,44px);
+  text-shadow:0 0 15px #ff71c5;
+  margin-bottom:8px;
+}
+.cake-screen .small{
+  color:#ffe6f5;font-size:18px;margin-bottom:28px;
+}
+.cake-wrap{
+  width:280px;height:245px;margin:0 auto 20px;position:relative;
+}
+.cake{
+  position:absolute;left:30px;bottom:15px;width:220px;height:100px;
+  border-radius:20px 20px 30px 30px;
+  background:linear-gradient(#ffb4d3,#ff5a9f);
+  border:4px solid #fff0fa;
+  box-shadow:0 18px 30px #1c0e383f;
+}
+.icing{
+  position:absolute;left:0;top:-12px;width:100%;height:45px;
+  background:#fff0f7;border-radius:25px;
+}
+.icing:after{
+  content:"";position:absolute;right:25px;top:22px;
+  width:30px;height:20px;background:#fff0f7;border-radius:50%;
+}
+.candle{
+  position:absolute;bottom:94px;width:18px;height:67px;
+  border-radius:7px;z-index:5;
+  background:repeating-linear-gradient(45deg,#a875ff 0 8px,#ff78bd 8px 16px);
+  transition:.5s;
+}
+.c1{left:58px}.c2{left:101px}.c3{left:144px}
+.flame{
+  position:absolute;left:1px;top:-27px;width:18px;height:27px;
+  background:#ffd85b;border-radius:60% 40% 55% 45%;
+  box-shadow:0 0 18px #ffbc4c;
+  animation:flame .55s infinite alternate;
+}
+@keyframes flame{
+  to{transform:scale(1.2) rotate(7deg);box-shadow:0 0 28px #ffca62}
+}
+.candle.off{
+  transform:translateY(20px);
+  opacity:.25;
+}
+.candle.off .flame{display:none}
+.smoke{
+  position:absolute;left:3px;top:-30px;
+  font-size:25px;opacity:0;
+}
+.candle.off .smoke{
+  animation:smoke 1.4s ease forwards;
+}
+@keyframes smoke{
+  0%{opacity:0;transform:translateY(10px) scale(.6)}
+  30%{opacity:.8}
+  100%{opacity:0;transform:translateY(-35px) translateX(8px) scale(1.3)}
+}
+.cake-note{
+  min-height:34px;margin:5px 0 18px;
+  color:#ffe9f7;font-weight:bold;font-size:18px;
+}
+.blow-btn[disabled]{
+  opacity:.5;cursor:not-allowed;transform:none;
+}
+.progress{
+  margin:15px auto 0;width:260px;height:9px;
+  background:#ffffff33;border-radius:20px;overflow:hidden;
+}
+.progress-bar{
+  height:100%;width:0;background:#ffd86c;
+  transition:.5s;box-shadow:0 0 12px #ffd86c;
+}
+
+/* ---------- LETTER ---------- */
+.letter-screen{align-items:flex-start;padding-top:55px}
+.letter-card{
+  width:min(850px,94vw);
+  background:#fff0f6f2;color:#3d194f;
+  border:4px solid #ffd0e8;
+  border-radius:28px;
+  padding:30px;
+  box-shadow:0 25px 70px #170c353f;
+  animation:letterIn 1s ease;
+}
+@keyframes letterIn{
+  from{opacity:0;transform:translateY(80px) rotate(-2deg)}
+  to{opacity:1;transform:none}
+}
+.letter-title{
+  text-align:center;color:#9b2e86;
+  font-size:clamp(32px,6vw,52px);
+  margin-bottom:20px;
+}
+.letter{
+  background:#fff9fc;
+  border:2px dashed #ef83b9;
+  border-radius:18px;
+  padding:25px;
+  line-height:1.8;
+  font-size:17px;
+}
+.letter p{margin-bottom:15px}
+.highlight{color:#e92f82;font-weight:bold}
+.joke{
+  background:#ffe8a9;border-radius:15px;
+  padding:14px;text-align:center;font-weight:bold;
+  margin:20px 0;
+}
+.final{text-align:center;color:#a62b83;font-size:24px;font-weight:bold}
+.footer{text-align:center;margin-top:22px;color:#7b3973}
+
+/* ---------- CONFETTI ---------- */
+.confetti{
+  position:fixed;top:-40px;z-index:50;
+  pointer-events:none;font-size:22px;
+  animation:fall 4s linear forwards;
+}
+@keyframes fall{
+  to{transform:translateY(115vh) rotate(720deg);opacity:.2}
+}
+
+@media (max-width:600px){
+  body{font-size:15px}
+  .screen{min-height:100svh;padding:20px 12px;overflow:hidden}
+  .inner{width:100%;max-width:430px}
+  .intro h1{font-size:clamp(48px,14vw,68px);margin-top:5px}
+  .intro p{font-size:18px;max-width:310px;margin:10px auto}
+  .gift-area{width:250px;margin:30px auto 15px;transform:scale(.88)}
+  .gift-area:hover{transform:scale(.88)}
+  .gift{width:235px;height:175px}
+  .box{width:200px;height:125px;left:18px}
+  .lid{width:218px;left:8px;height:42px;top:39px}
+  .ribbon-v{left:101px;height:125px;width:32px}
+  .ribbon-h{left:8px;width:218px;top:53px;height:15px}
+  .bow{left:69px;transform:scale(.9);transform-origin:top center}
+  .gift-label{top:105px;font-size:22px}
+  .hint{font-size:14px;padding:10px 16px}
+
+  .reveal h2{font-size:25px;line-height:1.2}
+  .reveal h1{font-size:clamp(52px,15vw,78px);margin:15px 0 5px}
+  .cat{font-size:82px;margin:15px 0 20px}
+  .next-btn,.blow-btn{width:min(92%,340px);min-height:54px;padding:13px 18px;font-size:17px}
+
+  .cake-screen{padding-top:35px}
+  .cake-screen h2{font-size:30px;line-height:1.15}
+  .cake-screen .small{font-size:15px;line-height:1.45;max-width:330px;margin:8px auto 16px}
+  .cake-wrap{width:250px;height:220px;transform:scale(.9);margin-bottom:2px}
+  .cake{left:15px;width:220px;height:92px}
+  .candle{bottom:86px;width:17px;height:62px}
+  .c1{left:57px}.c2{left:101px}.c3{left:145px}
+  .cake-note{min-height:42px;max-width:330px;margin:0 auto 12px;font-size:16px;line-height:1.4}
+  .progress{width:min(75%,280px);margin-top:13px}
+
+  .letter-screen{align-items:flex-start;padding:25px 10px 35px}
+  .letter-card{width:100%;border-radius:22px;padding:16px 11px;border-width:3px}
+  .letter-title{font-size:31px;line-height:1.15;margin-bottom:15px}
+  .letter{padding:17px 14px;font-size:15px;line-height:1.65}
+  .letter p{margin-bottom:13px}
+  .joke{padding:12px 9px;margin:15px 0;font-size:14px;line-height:1.5}
+  .final{font-size:21px}
+  .footer{font-size:13px;line-height:1.4}
+
+  .star{font-size:16px}.heart{font-size:23px}.paw{font-size:22px}
+  .s1{left:4%;top:8%}.s2{left:13%;top:28%}.s3{right:5%;top:11%}
+  .s4{right:14%;top:40%}.s5{left:47%;top:5%}.s6{left:75%;top:27%}
+  .h1{left:2%;top:42%}.h2{right:2%;top:34%}.h3{left:10%;top:78%}.h4{right:10%;top:76%}
+  .p1{left:15%;top:19%}.p2{right:15%;top:23%}.p3{left:5%;top:88%}.p4{right:5%;top:86%}
+}
+
+@media (max-width:380px){
+  .screen{padding-left:8px;padding-right:8px}
+  .intro h1{font-size:48px}.intro p{font-size:16px}
+  .gift-area{transform:scale(.78);margin-top:20px}
+  .gift-area:hover{transform:scale(.78)}
+  .reveal h1{font-size:51px}.cat{font-size:70px}
+  .cake-screen h2{font-size:27px}
+  .cake-wrap{transform:scale(.78);margin-top:-8px;margin-bottom:-20px}
+  .letter-title{font-size:27px}.letter{font-size:14px;padding:14px 11px}
+}
+
+@media (max-width:600px) and (orientation:landscape){
+  .screen{min-height:100svh;padding:14px}
+  .intro h1{font-size:43px}
+  .gift-area{margin:12px auto 5px;transform:scale(.62)}
+  .gift-area:hover{transform:scale(.62)}
+  .reveal h1{font-size:50px}.cat{font-size:55px;margin:7px}
+  .cake-wrap{transform:scale(.65);margin:-20px auto -35px}
+}
+
+
+/* ================= 8 AUGUST LOCK SCREEN ================= */
+#lockScreen{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  text-align:center;
+  background:
+    radial-gradient(circle at 50% 12%,#ffe8c7 0,#f69bc9 25%,#71408f 62%,#211746 100%);
+}
+.lock-card{
+  width:min(560px,94vw);
+  padding:32px 22px;
+  border:2px solid #ffffffaa;
+  border-radius:32px;
+  background:#35195ccc;
+  backdrop-filter:blur(15px);
+  box-shadow:0 25px 80px #10082188, inset 0 0 35px #ffb6e522;
+  animation:lockIn .8s ease;
+}
+.lock-cat{
+  font-size:76px;
+  animation:catBounce 1.7s infinite;
+}
+.lock-card h1{
+  margin:10px 0 8px;
+  color:#ffd1eb;
+  font-size:clamp(35px,8vw,58px);
+  text-shadow:0 0 20px #ff6fbd;
+}
+.lock-card p{
+  color:#ffeaf7;
+  font-size:18px;
+  line-height:1.5;
+}
+.lock-date{
+  margin:20px auto 12px;
+  display:inline-block;
+  padding:10px 18px;
+  border-radius:30px;
+  background:#ffffff1c;
+  border:1px solid #ffffff55;
+  color:#ffe7a9;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+.timer{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin:22px auto;
+}
+.time-box{
+  min-width:72px;
+  padding:12px 8px;
+  border-radius:18px;
+  background:#ff4fa02b;
+  border:1px solid #ffb6df66;
+  box-shadow:0 0 18px #ff63ba22;
+}
+.time-number{
+  display:block;
+  color:#fff;
+  font-size:30px;
+  font-weight:bold;
+}
+.time-label{
+  display:block;
+  color:#ffd9ee;
+  font-size:11px;
+  margin-top:3px;
+  letter-spacing:1px;
+}
+.lock-note{
+  font-size:14px!important;
+  opacity:.75;
+}
+@keyframes lockIn{
+  from{opacity:0;transform:scale(.85) translateY(25px)}
+  to{opacity:1;transform:none}
+}
+@media(max-width:600px){
+  #lockScreen{padding:14px}
+  .lock-card{padding:26px 15px;border-radius:26px}
+  .lock-cat{font-size:64px}
+  .lock-card h1{font-size:42px}
+  .lock-card p{font-size:16px}
+  .timer{gap:6px}
+  .time-box{min-width:64px;padding:10px 5px}
+  .time-number{font-size:25px}
+  .time-label{font-size:9px}
+}
+@media(max-width:380px){
+  .time-box{min-width:57px}
+  .time-number{font-size:22px}
+  .lock-card h1{font-size:36px}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= 8 AUGUST TIMER ================= -->
+<section id="lockScreen">
+  <div class="lock-card">
+    <div class="lock-cat">🐱</div>
+    <h1>Shhh... Billi! 🤫💗</h1>
+    <p>
+      Aapke liye ek special surprise ready hai... 🎁✨
+      <br>
+      Lekin ye <b>8 August</b> ko hi open hoga! 🎂
+    </p>
+
+    <div class="lock-date">🔒 UNLOCKS — 8 AUGUST, 12:00 AM (IST)</div>
+
+    <div class="timer">
+      <div class="time-box">
+        <span id="days" class="time-number">00</span>
+        <span class="time-label">DAYS</span>
+      </div>
+      <div class="time-box">
+        <span id="hours" class="time-number">00</span>
+        <span class="time-label">HOURS</span>
+      </div>
+      <div class="time-box">
+        <span id="minutes" class="time-number">00</span>
+        <span class="time-label">MINUTES</span>
+      </div>
+      <div class="time-box">
+        <span id="seconds" class="time-number">00</span>
+        <span class="time-label">SECONDS</span>
+      </div>
+    </div>
+
+    <p class="lock-note">
+      💗 Billu ne sab ready kar diya hai... bas thoda sa wait! 🐾
+    </p>
+  </div>
+</section>
+
+
+<div class="bg">
+  <div class="glow"></div>
+  <div class="star s1">✦</div><div class="star s2">✦</div>
+  <div class="star s3">✧</div><div class="star s4">✦</div>
+  <div class="star s5">✧</div><div class="star s6">✦</div>
+
+  <div class="heart h1">♡</div><div class="heart h2">♡</div>
+  <div class="heart h3">♥</div><div class="heart h4">♡</div>
+
+  <div class="paw p1">🐾</div><div class="paw p2">🐾</div>
+  <div class="paw p3">🐾</div><div class="paw p4">🐾</div>
+</div>
+
+
+<!-- =====================================================
+     SCREEN 1 — OPENING
+===================================================== -->
+<section id="intro" class="screen">
+  <div class="inner intro">
+    <h1>Hey Billi! 💗</h1>
+    <p>Kuch special aapke liye... 🐱✨</p>
+
+    <div class="gift-area" onclick="openGift()">
+      <div class="gift">
+        <div class="bow"><div class="knot"></div></div>
+        <div class="lid"></div>
+        <div class="ribbon-h"></div>
+        <div class="box"></div>
+        <div class="ribbon-v"></div>
+        <div class="gift-label">Click to Open 💗</div>
+      </div>
+    </div>
+
+    <div class="hint">🎁 Psst... Billu also excited! 🐾</div>
+  </div>
+</section>
+
+
+<!-- =====================================================
+     SCREEN 2 — BIRTHDAY REVEAL
+===================================================== -->
+<section id="reveal" class="screen hidden">
+  <div class="inner reveal">
+    <h2>🎉 Happy Birthday Billi! 🎉</h2>
+    <h1>HAPPY<br>BIRTHDAY! 💗</h1>
+    <div class="cat">🐱</div>
+    <button class="next-btn" onclick="showCake()">🎂 There's one more thing...</button>
+  </div>
+</section>
+
+
+<!-- =====================================================
+     SCREEN 3 — ONE-BY-ONE CANDLES
+===================================================== -->
+<section id="cakeScreen" class="screen hidden">
+  <div class="inner cake-screen">
+    <h2>Make a wish, Billi! ✨</h2>
+    <div class="small">But this time... candles ek-ek karke blow hongi 😼🎂</div>
+
+    <div class="cake-wrap">
+
+      <div class="candle c1" id="candle1">
+        <div class="flame"></div><div class="smoke">💨</div>
+      </div>
+
+      <div class="candle c2" id="candle2">
+        <div class="flame"></div><div class="smoke">💨</div>
+      </div>
+
+      <div class="candle c3" id="candle3">
+        <div class="flame"></div><div class="smoke">💨</div>
+      </div>
+
+      <div class="cake">
+        <div class="icing"></div>
+      </div>
+    </div>
+
+    <div id="cakeNote" class="cake-note">
+      Candle 1 ready hai! 🕯️
+    </div>
+
+    <button id="blowBtn" class="blow-btn" onclick="blowNextCandle()">
+      💨 Blow Candle 1
+    </button>
+
+    <div class="progress">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+</section>
+
+
+<!-- =====================================================
+     SCREEN 4 — LETTER
+===================================================== -->
+<section id="letterScreen" class="screen letter-screen hidden">
+  <div class="letter-card">
+
+    <div class="letter-title">💌 Letter from Billu 💌</div>
+
+    <div class="letter">
+
+      <p><b>To my Billi 🐱💗,</b></p>
+
+      <p>
+        Main, aapka Billu, aapko
+        <span class="highlight">Happiest Birthdayyy! 🎂🥳✨</span>
+        wish karta hoon.
+      </p>
+
+      <p>
+        Aur God se bas ye pray karta hoon ki woh aapko hamesha khush rakhe,
+        aapke face par hamesha smile rakhe aur aapko har buri cheez se door rakhe. 🫶🏻✨
+      </p>
+
+      <div class="joke">
+        Aur haan... Pawan jaise gande ladke se bhi door rakhe 😭😂<br><br>
+        Agar usse aapki fikar hoti toh woh
+        <b>Happy Birthday zaroor wish karta!</b> 😤
+      </div>
+
+      <p>
+        Aap tension mat lena. Agar woh aapse baat nahi bhi karega,
+        toh yaad rakhna ki
+        <span class="highlight">aapka Billu zaroor karega. 🐱❤️</span>
+      </p>
+
+      <p>
+        Aur aap na ye mat sochna ki aapke saath koi nahi hai,
+        kyunki
+        <b>aapka Billu aapke saath rahega jab tak ye Billu alive rahega.</b>
+        🥹🐱
+      </p>
+
+      <p>
+        Aur future ke baare mein zyada mat sochna.
+        Jo bhi God ke plan mein hoga, woh achha hi hoga.
+        <span class="highlight">
+          Agar God ke paas aapke aur mere liye koi plan hoga,
+          toh aap aur main hamesha saath rahenge. ❤️✨
+        </span>
+      </p>
+
+      <p>
+        Aur last mein, mere liye — matlab <b>Billu 😺</b> —
+        please padhai mein bhi thoda sa dhyaan laga dena.
+      </p>
+
+      <p style="text-align:center;font-size:20px">
+        <b>Jyada nahi... chotu sa. 😭📚</b>
+      </p>
+
+      <p>
+        Khush rehna, enjoy karna aur aaj ka din full enjoy karna! 🎉🎀
+      </p>
+
+      <p class="final">
+        Once Again,<br>
+        Happiest Birthday Billi! 🎂💗🐱
+      </p>
+
+      <div class="joke">
+        🚨 OFFICIAL ANNOUNCEMENT 🚨<br><br>
+        YE PAWAN KI TARAF SE NAHI HAI 😤<br>
+        YE AAPKE BILLU KI TARAF SE HAI 😺❤️
+      </div>
+
+    </div>
+
+    <div class="footer">
+      Made with lots of love by Billu for Billi 💖🐾
+    </div>
+
+  </div>
+</section>
+
+
+<script>
+
+/* ---------- SCREEN CONTROL ---------- */
+function showScreen(id){
+  ["intro","reveal","cakeScreen","letterScreen"].forEach(screen=>{
+    document.getElementById(screen).classList.add("hidden");
+  });
+
+  document.getElementById(id).classList.remove("hidden");
+
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* ---------- OPEN GIFT ---------- */
+function openGift(){
+  confetti();
+
+  setTimeout(()=>{
+    showScreen("reveal");
+  },700);
+
+  setTimeout(confetti,1000);
+  setTimeout(confetti,1700);
+}
+
+/* ---------- CAKE ---------- */
+function showCake(){
+  showScreen("cakeScreen");
+  resetCandles();
+}
+
+/* ---------- ONE CANDLE AT A TIME ---------- */
+let blown = 0;
+const totalCandles = 3;
+
+function resetCandles(){
+  blown = 0;
+
+  for(let i=1;i<=totalCandles;i++){
+    document.getElementById("candle"+i).classList.remove("off");
+  }
+
+  document.getElementById("cakeNote").textContent =
+    "Candle 1 ready hai! 🕯️";
+
+  const btn=document.getElementById("blowBtn");
+  btn.disabled=false;
+  btn.textContent="💨 Blow Candle 1";
+
+  document.getElementById("progressBar").style.width="0%";
+}
+
+function blowNextCandle(){
+
+  if(blown >= totalCandles) return;
+
+  /* IMPORTANT:
+     Sirf current candle off hoti hai.
+     Baaki candles jalti rehti hain.
+  */
+  blown++;
+
+  const candle=document.getElementById("candle"+blown);
+  candle.classList.add("off");
+
+  const progress=(blown/totalCandles)*100;
+  document.getElementById("progressBar").style.width=progress+"%";
+
+  if(blown < totalCandles){
+
+    const next=blown+1;
+
+    document.getElementById("cakeNote").textContent =
+      "Niceee! 😺 Ab Candle "+next+" ki baari! 🕯️";
+
+    document.getElementById("blowBtn").textContent =
+      "💨 Blow Candle "+next;
+
+  }else{
+
+    document.getElementById("cakeNote").textContent =
+      "Yayyy! Saari candles blow ho gayi! 🎉💗";
+
+    document.getElementById("blowBtn").textContent =
+      "💌 Open Letter from Billu";
+
+    document.getElementById("blowBtn").onclick=showLetter;
+
+    confetti();
+    setTimeout(confetti,700);
+    setTimeout(confetti,1400);
+  }
+}
+
+/* ---------- LETTER ---------- */
+function showLetter(){
+  showScreen("letterScreen");
+
+  confetti();
+  setTimeout(confetti,700);
+  setTimeout(confetti,1400);
+}
+
+/* ---------- CONFETTI ---------- */
+function confetti(){
+
+  const items=[
+    "🎉","✨","💗","💖","🎀","⭐","🐾","🐱","💫","🎂"
+  ];
+
+  for(let i=0;i<65;i++){
+
+    const piece=document.createElement("div");
+
+    piece.className="confetti";
+
+    piece.textContent=
+      items[Math.floor(Math.random()*items.length)];
+
+    piece.style.left=Math.random()*100+"vw";
+
+    piece.style.animationDuration=
+      (2+Math.random()*3)+"s";
+
+    piece.style.animationDelay=
+      Math.random()*1.2+"s";
+
+    document.body.appendChild(piece);
+
+    setTimeout(()=>{
+      piece.remove();
+    },6000);
+  }
+}
+
+
+/* ================= 8 AUGUST — IST TIMER ================= */
+const lockScreen = document.getElementById("lockScreen");
+
+/*
+  Target is 8 August at 00:00:00 Indian Standard Time.
+  This calculates the target in UTC, so it works even if
+  the website is opened on a device set to another timezone.
+*/
+function getNextAug8IST(){
+  const now = new Date();
+  const year = now.getUTCFullYear();
+
+  // 8 Aug 00:00 IST = 7 Aug 18:30 UTC
+  let target = new Date(Date.UTC(year, 7, 7, 18, 30, 0));
+
+  // If this year's unlock time has passed, use next year's Aug 8.
+  if(now >= target){
+    target = new Date(Date.UTC(year + 1, 7, 7, 18, 30, 0));
+  }
+
+  return target;
+}
+
+const unlockTime = getNextAug8IST();
+
+function updateTimer(){
+  const now = new Date();
+  let difference = unlockTime.getTime() - now.getTime();
+
+  if(difference <= 0){
+    document.getElementById("days").textContent="00";
+    document.getElementById("hours").textContent="00";
+    document.getElementById("minutes").textContent="00";
+    document.getElementById("seconds").textContent="00";
+
+    lockScreen.style.display="none";
+    clearInterval(timerInterval);
+
+    // Start the opening-page celebration
+    confetti();
+    return;
+  }
+
+  const days = Math.floor(difference / 86400000);
+  difference %= 86400000;
+
+  const hours = Math.floor(difference / 3600000);
+  difference %= 3600000;
+
+  const minutes = Math.floor(difference / 60000);
+  const seconds = Math.floor((difference % 60000) / 1000);
+
+  document.getElementById("days").textContent=String(days).padStart(2,"0");
+  document.getElementById("hours").textContent=String(hours).padStart(2,"0");
+  document.getElementById("minutes").textContent=String(minutes).padStart(2,"0");
+  document.getElementById("seconds").textContent=String(seconds).padStart(2,"0");
+}
+
+updateTimer();
+const timerInterval=setInterval(updateTimer,1000);
+
+</script>
+
+</body>
+</html>
